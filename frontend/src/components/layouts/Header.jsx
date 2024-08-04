@@ -1,8 +1,20 @@
 import React from "react"
 import Search from "./Search"
 import { Link } from "react-router-dom";
+import {useAlert} from "react-alert";
+import {useDispatch, useSelector} from "react-redux";
+import { logout } from "../../actions/userAction";
 
 function Header() {
+    const alert = useAlert();
+    const dispatch= useDispatch();
+    const {user,loading} = useSelector((state) => state.auth);
+
+    const logoutHandler =() => {
+        dispatch(logout());
+        alert.success("Logged Out Succesfully!")
+    }
+
     return ( <>
         <nav className="navbar row sticky-top">
         <div className="col-12 col-md-3">
@@ -21,25 +33,48 @@ function Header() {
                 0
             </span>
             {
-                5 < 10 ? (
+               user ? (
                     <>
                         <div className="ml-4 dropdown d-inline">
-                            <figure className="avatar avatar-nav">
+                        <Link to="/" className="btn dropdown-toggle text-white mr-4"
+                        type="button"
+                        id="dropDownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup ="true"
+                        aria-expanded="false"
+                        >
+                             <figure className="avatar avatar-nav">
                                 <img 
                                     src="/images/images.png"
                                     alt="avatar"
                                     className="rounded-circle"
                                 />
                             </figure>
+                        
+                           
                             <span style={{color:"white" ,fontWeight:"bolder"}}>
-                                Harsh
+                                {user && user.name}
                             </span>
+                            </Link>
+                            <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
+                                <Link className="dropdown-item" to="/eats/orders/me/myOrders">
+                                     Orders
+                                </Link>
+                                <Link className="dropdown-item" to="/users/me">
+                                     Profile
+                                </Link>
+                                <Link className="dropdown-item" to="/" onClick={logoutHandler}>
+                                     Logout
+                                </Link>
+                            </div> 
                         </div>
                     </>
                 ):(
-                    <div className="btn ml-4" id="login_btn">
+                    !loading && (
+                    <Link to="/users/login" className="btn ml-4" id="login_btn">
                         Login
-                    </div>
+                    </Link>
+                    )
                 )
             }
         </div>
