@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearError } from "../../actions/restaurantAction";
+import { clearErrors } from "../../actions/userAction";
+import { register } from "../../actions/userAction";
 
 const Register = () => {
   const alert = useAlert();
@@ -26,22 +28,22 @@ const Register = () => {
     (state) => state.auth
   );
 
-  //handle Rdirection with useEffect:
-useEffect=(()=> {
+  //handle Redirection with useEffect:
+  useEffect=(() => {
   if(isAuthenticated){
-    navigate("/")
+    navigate("/");
   }
   if(error){
     alert.error(error);
-    dispatch(clearError());
+    dispatch(clearErrors());
   }
-},[dispatch,alert,isAuthenticated,error,navigate])
+},[dispatch, alert, isAuthenticated, error, navigate]);
 
 const submitHandler =(e) => {
   e.preventDefault();
 
   if(password !== passwordConfirm){
-    alert.error("Password Don't Matched");
+    alert.error("Password Didn't Matched");
     return  ;
   }
 
@@ -52,10 +54,11 @@ const submitHandler =(e) => {
   formData.set("passwordConfirm",passwordConfirm);
   formData.set("phoneNumber",phoneNumber);
   if(avatar===""){
-    formData.set("avatar","images/images.png")
+    formData.set("avatar","/images/images.png")
   }else{
-    formData.set("avatar",avatar)
+    formData.set("avatar",avatar);
   }
+
   dispatch(register(formData));
 }; 
 const onChange=(e)=>{

@@ -42,9 +42,9 @@ export const authReducer=(state={
                 error:action.payload,
             };
 
-        case LOAD_USER_FAIL:
+        case LOGIN_FAIL:
             case REGISTER_USER_FAIL:
-                case LOGIN_FAIL:
+                case LOAD_USER_FAIL:
                     return{
                         ...state,
                         loading:false,

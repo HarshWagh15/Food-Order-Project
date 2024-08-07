@@ -5,18 +5,19 @@ import { CLEAR_ERRORS, LOAD_USER_FAIL, LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOG
 import axios from "axios";
 
 
-export const login = () => async (dispatch) => {
+//Login
+export const login = (email,password) => async (dispatch) => {
     try {
         dispatch({type : LOGIN_REQUEST});
 
         const config = {
             headers:{
-                    "Content-Type":"applications/json",
+                    "Content-Type":"application/json",
             },
         };
         const {data} = await axios.post(`/api/v1/users/login`,
-            // {email,password},
-            // config
+            {email,password},
+            config
 
         );
         dispatch({
@@ -39,7 +40,7 @@ export const register = (userData) => async(dispatch) => {
         const config={
             headers:{"Content-Type":"multipart/form-data"},
         };
-        const {data} = await axios.post(`/api/v1/users/signup`);
+        const {data} = await axios.post(`/api/v1/users/signup`,userData,config);
         dispatch({
             type:REGISTER_USER_SUCCESS,
             payload:data.data.user,
