@@ -6,7 +6,7 @@ function Search() {
         <form>
             <div className='input-group'>
             <input type='text' 
-            placeholder='Search your favourite Restaurent'
+            placeholder='Search your favourite Restaurant'
             id='search_field'
             className='form-control' />
             <div className='input-group-append'>

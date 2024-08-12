@@ -9,6 +9,7 @@ function Header() {
     const alert = useAlert();
     const dispatch= useDispatch();
     const {user,loading} = useSelector((state) => state.auth);
+    const {cartItems} = useSelector(state => state.cart);
 
     const logoutHandler =() => {
         dispatch(logout());
@@ -26,12 +27,15 @@ function Header() {
             <Search />
         </div>
         <div className="col-12 col-md-3 mt-2 mt-md-0">
+            <Link to="/cart" style={{textDecoration:"none"}}>
             <span className="ml-3" id="cart">
                 Cart
             </span>
             <span className="ml-1" id="cart_count">
-                0
+                {cartItems.length}
             </span>
+            </Link>
+            
             {
                user ? (
                     <>
@@ -45,7 +49,7 @@ function Header() {
                         >
                              <figure className="avatar avatar-nav">
                                 <img 
-                                    src="/images/images.png"
+                                    src={user.avatar.url}
                                     alt="avatar"
                                     className="rounded-circle"
                                 />
