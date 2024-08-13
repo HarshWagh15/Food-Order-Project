@@ -47,8 +47,8 @@ function FoodItem({ fooditem, restaurant }) {
             setQuantity(0);
             setShowButtons(false);
             dispatch(removeItemFromCart(fooditem._id));
-        };
-
+        }
+    };
 
         const addToCartHandler = () => {
             if (!isAuthenticated && !user) {
@@ -123,5 +123,5 @@ function FoodItem({ fooditem, restaurant }) {
             </div>
         );
     }
-}
+
 export default FoodItem;

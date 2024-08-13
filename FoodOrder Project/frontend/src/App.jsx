@@ -4,7 +4,7 @@ import Header from "./components/layouts/Header";
 import Home from "./components/layouts/Home";
 import Footer from "./components/layouts/Footer";
 import Menu from "./components/layouts/Menu";
-import Cart from "./components/cart/Cart";
+// import Cart from "./components/cart/Cart";
 import Login from "./components/users/Login";
 import Register from "./components/users/Register";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -40,7 +40,7 @@ export default function App() {
     <Route path="/users/forgotPassword" element={<ForgotPassword />} />
     <Route path="/users/resetPassword/:token" element={<NewPassword />} />
   </Routes>
-  <Cart />
+  {/* <Cart /> */}
   </div>
   <div>
     <Footer />
