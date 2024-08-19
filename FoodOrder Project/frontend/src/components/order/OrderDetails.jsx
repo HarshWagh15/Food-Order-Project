@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from "react";
+// import React, { Fragment, useEffect } from "react";
+import React from "react";
 import Loader from "../layouts/Loader";
 import { LiaRupeeSignSolid } from "react-icons/lia";
 
